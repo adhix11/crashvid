@@ -1,0 +1,33 @@
+<br>
+<%= render :partial => 'sidebar' %>
+
+
+
+<table class="table table-hover table-striped">
+	<thead>
+		<tr>
+			<th>Thumbnail</th>
+			<th>Location</th>
+			<th>Total Downloads</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @videos.each do |video| %>
+			<tr>
+				<td><%= image_tag(video.video.thumb.pic_1.url, :class => 'img-small') %></td>
+				<td><%= video.event.location_name %></td>
+				<td><%= video.purchases.count %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+</div>

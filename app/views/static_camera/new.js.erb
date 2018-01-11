@@ -1,0 +1,20 @@
+<%if @response["status"] == 1%>
+    $('#camera_form').html('<%=@response["message"]%>.<br/> <%=link_to "Sign in",new_user_session_path%> '); 
+<%elsif @response["status"] == 2%>
+    $('#camera_form').html("<%=@response["message"]%>. <br/> <a href='/users/auth/stripe_connect'> Click here to link </a> "); 
+<%else%>
+    $('#camera_form').html("<%= j (render 'form') %>");
+var lat = $("#hidden_lat").val();
+var lng = $("#hidden_lng").val();
+var place_id = $("#hidden_place_id").val();
+var place_address = $("#hidden_address").val();
+$("#static_camera_latitude").val(lat);
+$("#static_camera_longitude").val(lng);
+$("#static_camera_location_name").val(place_address);
+$("#place_id").val(place_id);
+$("#static_camera_latitude").attr('readonly',true);
+$("#static_camera_longitude").attr('readonly',true);
+$("#static_camera_location_name").attr('readonly',true);
+
+<%end%>
+$("#camera_create").modal("show");

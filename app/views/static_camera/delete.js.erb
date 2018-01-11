@@ -1,0 +1,4 @@
+$('#camera_form').html("<%= j (render 'confirm_delete') %>");
+var id = $("#hidden_marker_id").val();
+$("#static_camera_id").val(id);
+$("#camera_create").modal("show");

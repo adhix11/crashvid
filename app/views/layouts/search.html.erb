@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Crashvid</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="container-fluid section-bg padZero">
+      <div class="container section-wrapper">
+        <div class="col-md-12 text-center">
+          <img src="/assets/cv-logo-large.png" />
+        </div>
+        <%=yield%>
+      </div>
+    </div>
+    </div>
+    <div class="container-fluid cv-footer footer-colored">
+      <div class="container padZero">
+        <div class="col-md-2 col-xs-12 footer-logo">
+          <span><a href="http://www.digiryte.com"><i class="fa fa-copyright"></i> 2017 Digiryte Ltd</a></span>
+        </div>
+        <div class="col-md-6 col-xs-6">
+          <ul class="footer-links padZero">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Policy</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-xs-6">
+          <ul class="social-icons padZero">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <%= javascript_include_tag 'application' %>
+
+    <script type="text/javascript">
+$(document).ready(function() {
+  var va_height = $(window).height();
+  var va_width = $(window).width();
+  $('.section-bg').css('height', va_height + 'px');
+}); 
+Stripe.setPublishableKey('pk_test_mgotCtnX4wfBFJ5ZYA1nMLy0');
+    </script>
+
+
+  </body>
+</html>

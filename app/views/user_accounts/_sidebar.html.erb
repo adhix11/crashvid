@@ -1,0 +1,20 @@
+<div class="container">
+<div class="row">
+	<div class="col-md-2">
+		<div class="nav nav-pills nav-stacked">
+			  <li role="presentation" class="<%= 'active' if params[:action] == 'edit' %>"><%= link_to "Edit Account", edit_user_account_path(current_user) %></li>
+			  <li role="presentation" class="<%= 'active' if params[:action] == 'uploaded_videos' %>"><%= link_to "Videos", videos_path %></li>
+			  <li role="presentation" class="<%= 'active' if params[:action] == 'events' %>"><%= link_to "Events", user_events_path %></li>
+			  <li role="presentation" class="<%= 'active' if params[:action] == 'cameras' %>"><%= link_to "Cameras", cameras_path %></li>
+			  <li role="presentation" class="<%= 'active' if params[:action] == 'payments' %>"><%= link_to "Payments", payments_path %></li>
+		</div>
+
+	</div>
+
+
+	<div class="col-md-10">
+
+
+
+
+

@@ -1,0 +1,118 @@
+<br>
+<%= render :partial => 'sidebar' %>
+
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs nav-justified" role="tablist">
+    <li role="presentation" class="active"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+    
+    <li role="presentation"><a href="#payment_status" aria-controls="payment_status" role="tab" data-toggle="tab">Transactions</a></li>
+    
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="settings">
+        
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+        <br>
+        <br>
+        <%= form_for @user, :url => { :action => "update_payment_info", :id => @user, :controller => "user_accounts" }, :html => { :class => "form-horizontal" } do |f| %>
+
+          <% if @user.errors.any? %>
+            <div id="error_expl" class="panel panel-danger">
+              <div class="panel-heading">
+                <h3 class="panel-title"><%= pluralize(@user.errors.count, "error") %> prohibited this event from being saved:</h3>
+              </div>
+              <div class="panel-body">
+                <ul>
+                  <% @user.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          <% end %>
+
+          <div class="form-group">
+            <%= f.label :paypal_email, :class => 'control-label col-md-4' %>
+            <div class="col-md-8">
+              <%= f.text_field :paypal_email, :class => 'form-control' %>
+            </div>
+          </div> 
+             
+          <div class="form-group">
+            <div class="col-md-offset-4">
+              <%= f.submit nil, :class => 'btn btn-primary' %>
+             
+            </div>
+          </div>
+        <% end %>
+
+        </div>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="payment_status">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Thumbnail</th>
+          <th>Location</th>
+          <th>Status</th>
+           <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+     
+
+        <% @videos.each do |video| %>
+  
+           <% if !video.purchases.empty? %>
+         
+          
+            <% video.purchases.each do |payment| %>
+                <% if payment.payment_status == 'COMPLETED' %>
+                    <tr class="success">
+                <% else %>
+                    <tr class="warning">
+                <% end %>
+               
+                 <td><%= image_tag(video.video.thumb.pic_1.url, :class => 'img-small') %></td>
+                 <td> <%= video.event.location_name %></td>
+              
+                 <td><%= payment.payment_status %></td>
+                 <td><%= payment.amount %></td>
+               </tr>
+            <% end %>
+          
+          
+
+          <% end %>
+          
+         
+
+                  
+      <% end %>
+        </tbody>
+        </table>
+
+    </div>
+    
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+</div>

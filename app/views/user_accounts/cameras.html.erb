@@ -1,0 +1,11 @@
+<%= render :partial => 'sidebar' %>
+<h1>Cameras</h1>
+<% @cameras.each do |camera| %>
+	<%= camera.location_name %> <br>
+	<%= link_to "View on map", root_path(:lat => camera.latitude, :lng=> camera.longitude) %>
+<% end %>
+
+
+</div>
+
+</div>

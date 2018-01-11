@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Crashvid</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= csrf_meta_tags %>
+    <%= include_gon%>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>  
+</head>
+<body>
+  <%= render "login/login_modal" %>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><span><%=image_tag("cv-logo.png",:class=>"img-responsive")%></span></a>
+        </div>
+        
+        <div class="navbar-collapse collapse" id="searchbar">
+          <ul class="nav navbar-nav navbar-right cv-navbar">
+            <li class="">
+              <a href="#"><i class="fa fa-question-circle"></i><span class="navbar-item">How it works?</span></a>
+            </li>
+            <li class="">
+              <%if user_signed_in? %>
+                <%if !current_user.cart.nil? %>
+                  <a id="cd-cart-trigger"><i class="fa fa-shopping-cart badge1" data-badge="<%=current_user.cart.cart_items.count%>"></i>
+                  <span class="navbar-item badge1" data-badge="<%=current_user.cart.cart_items.count%>">Cart</span></a>
+                <%else %>
+                  <a id="cd-cart-trigger"><i class="fa fa-shopping-cart badge1" data-badge="0"></i>
+                  <span class="navbar-item badge1" data-badge="0">Cart</span></a>
+                <%end%>
+              <%end%>
+            </li>
+            <li class="dropdown user">
+              <%if user_signed_in? %>
+
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Welcome <span><%=current_user.email%></span>
+                  <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><%=link_to "Account Settings", edit_user_account_path(current_user) %></li>
+                  <li><%=link_to "Logout",destroy_user_session_path,:method=>:delete%></li>
+                </ul>
+
+              <%else%>
+                  <%= link_to "Sign In", "#login", "data-toggle" => "modal" %>
+              <%end%>
+            </li>
+          </ul>
+          <%= form_tag(search_path, method: "get",:id=>"search",:class=>"navbar-form visible-lg visible-sm visible-md hidden-xs") do %>
+            <div class="form-group" style="display:table;">
+              <input type="text" name="location" id="location" placeholder="Location"  class="form-control cv-search location" onfocus="this.select();" onmouseup="return false;">
+              <input type="text" name="search_date_of_occurence" id="search_date_of_occurence" placeholder="Date" class="form-control cv-search">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <input type="hidden" name="place_id" id="place_id"/>
+            </div>
+          <%end%>
+        </div>
+        <div class="visible-xs hidden-sm hidden-md hidden-lg resp-searchbar">
+          <%= form_tag(search_path, method: "get",:id=>"search",:class=>"navbar-form visible-xs") do %>
+            <div class="form-group" style="display:table;">
+              <input type="text" name="location" id="location" placeholder="Location"  class="form-control cv-search location" onfocus="this.select();" onmouseup="return false;">
+              <input type="text" name="search_date_of_occurence" id="search_date_of_occurence" placeholder="Date" class="form-control cv-search" style="width: 40%;float: left;">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <input type="hidden" name="place_id" id="place_id"/>
+            </div>
+          <%end%>
+        </div>
+      </div>
+    </div>
+    <div id="cd-shadow-layer"></div>
+    <div id="cd-cart">
+        <h2>Cart</h2>
+        <%if user_signed_in? %>
+          <%if !current_user.cart.nil? %>
+            <ul class="cd-cart-items">
+              <%current_user.cart.cart_items.each do |cart_item|%>
+              <li>
+                <div class="row">
+                  <div class="col-md-8"><%=image_tag(cart_item.event_video.video.thumb.pic_1.url)%></div>
+                  <div class="col-md-2"><a href=""><i class="fa fa-times"></i></a></div>
+                </div>
+              </li>
+              <%end%>
+            </ul> <!-- cd-cart-items -->
+          <%else%>
+            <ul class="cd-cart-items">
+              <li>
+                There are no items in your cart
+              </li>
+            </ul>
+          <%end%>
+        <%end%>
+       
+        <div class="cd-cart-total">
+          <p>Total <span>$39.96</span></p>
+        </div> <!-- cd-cart-total -->
+       
+        <a href="/checkout" class="checkout-btn">Checkout</a>
+        
+        <p class="cd-go-to-cart"><a href="">Go to cart page</a></p>
+
+    </div>
+
+    <div class="container cp-container padZero">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %> alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <%= value %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
+    <div class="container-fluid cv-footer footer-colored">
+      <div class="container padZero">
+        <div class="col-md-2 col-xs-12 footer-logo">
+          <span><a href="http://www.digiryte.com"><i class="fa fa-copyright"></i> 2017 Digiryte Ltd</a></span>
+        </div>
+        <div class="col-md-6 col-xs-12 links_container">
+          <ul class="footer-links padZero">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Policy</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-xs-12 social_container">
+          <ul class="social-icons padZero">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+      <%= javascript_include_tag 'application' %>
+      <%=include_gon%>
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF-_0vmQK55PeNaA2ciZz4F6QIFKtmM1g"></script>
+      <script type="text/javascript" src="https://js.stripe.com/v2/"> </script>
+      <script type="text/javascript">
+      $(document).ready(function(){
+        var va_height = $(window).height();
+        var va_width = $(window).width();
+        $('.section-bg').css('height', va_height + 'px');
+      });
+      setTimeout("$('.alert').hide()", 3000)
+      </script>
+      <script type="text/javascript">
+       $(function ()
+        { 
+          $("#login").modal({show:false });
+          }); 
+      </script>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<div id="map_canvas" class="col-md-12 col-xs-12 map-view padZero"></div>
+<!-- <div class="cursor-gif" style="display: none;">
+  <span><img src="assets/click.gif" /></span>
+  <span>Click on a map to create event or Click on a marker to upload videos to existing event</span>
+  </div> --> 
+<div class="col-md-6 col-xs-12 video-list-slider right-slider collapse" id="eventCollapse">
+  <span class="close-slider"><i class="fa fa-close"></i></span>
+  <div class="mTop-30">
+    <div id="all_videos">
+    </div>
+  </div>
+</div>
+</div>
+<div id = "one_video">
+</div>
+<div id="cv_create" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" id="cv_create_title">Creat Event (Request Video)</h4>
+      </div>
+      <div class="modal-body" id="new_event_form">
+      </div>
+    </div>
+  </div>
+</div>
+<div id="camera_create" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Static Cameras</h4>
+      </div>
+      <div class="modal-body" id="camera_form">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 col-xs-12 payment-slider right-slider" style="display: none;">
+  <span class="close-slider"><i class="fa fa-close"></i></span>
+  <div class="payment-view">
+    <h3>Payment Details</h3>
+    <div class="payment-form col-xs-12">
+      <div class="form-group">
+        <label>Card Number</label>
+        <input type="text" class="form-control" placeholder="XXXX XXXX XXXX XXXX" value="">
+      </div>
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" placeholder="Name on Card" value="">
+      </div>
+      <div class="form-group">
+        <label>Expiration</label>
+        <input type="text" class="form-control" placeholder="MM" value="">
+      </div>
+      <div class="form-group">
+        <label>Year</label>
+        <input type="text" class="form-control" placeholder="YYYY" value="">
+      </div>
+      <div class="form-group">
+        <label>CVV</label>
+        <input type="text" class="form-control" placeholder="Eg., 322" value="">
+      </div>
+    </div>
+    <div class="col-xs-6 padZero">
+      <img class="img-responsive" src="assets/payment.png"/>
+    </div>
+    <div class="col-xs-6 text-right"> 
+      <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+  </div>
+</div>
+<%= include_gon %>

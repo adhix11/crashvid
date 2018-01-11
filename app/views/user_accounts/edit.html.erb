@@ -1,0 +1,118 @@
+<br>
+<%= render :partial => 'sidebar' %>
+<div class="container-fluid">
+
+
+<%= flash[:notice] %>
+<%= flash[:alert] %>
+
+<div class="row">
+
+<div class="col-md-6">
+<%= form_for @user_account, :html => { :class => "form-horizontal" } do |f| %>
+
+  <% if @user_account.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@user_account.errors.count, "error") %> prohibited this event from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <% @user_account.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :first_name, :class => 'col-md-4 control-label' %>
+    <div class="col-md-8">
+      <%= f.text_field :first_name, :class => 'form-control' %>
+    </div>
+  </div> 
+  <div class="form-group">
+    <%= f.label :last_name, :class => 'col-md-4 control-label' %>
+    <div class="col-md-8">
+      <%= f.text_field :last_name, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :address_line_1, :class => 'col-md-4 control-label' %>
+    <div class="col-md-8">
+      <%= f.text_area :address_line_1, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address_line_2, :class => 'col-md-4 control-label' %>
+    <div class="col-md-8">
+      <%= f.text_area :address_line_2, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :city, :class => 'col-md-4 control-label' %>
+    <div class="col-md-8">
+      <%= f.text_field :city, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :country, :class => 'col-md-4 control-label' %>
+    <div class="col-md-8">
+      <%= f.country_select :country, {}, {:class => 'form-control'} %>
+      
+    </div>
+  </div>
+
+   
+
+  <div class="form-group">
+    <%= f.label :zipcode, :class => 'col-md-4 control-label' %>
+    <div class="col-md-8">
+      <%= f.text_field :zipcode, :class => 'form-control' %>
+    </div>
+  </div>
+
+  
+
+
+  <div class="form-group">
+    <%= f.label :country_code, :class => 'col-md-4 control-label' %>
+    <div class="col-md-8">
+	  <%= f.select_tag :country_code, 
+	                  options_for_select(@countries, :selected => f.object.country_code), name: "user_account[country_code]", :class => 'form-control' 
+	  %>
+  	</div>
+  </div>
+  <div class="form-group">
+    <%= f.label :phone, :class => 'col-md-4 control-label' %>
+    <div class="col-md-8">
+      <%= f.text_field :phone, :class => 'form-control' %>
+    </div>
+  </div>
+  
+
+  
+    
+  <div class="form-group">
+    <div class="col-md-offset-4">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+     
+    </div>
+  </div>
+<% end %>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>

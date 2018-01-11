@@ -1,0 +1,32 @@
+<%= include_gon %>
+<div class="col-md-12 col-xs-12 cart-container">
+  <h3> Cart </h3>
+  <div class="cart-view">
+    <table class="table cv-table">
+      <thead>
+        <tr>
+          <th> Event Video </th>
+          <th> Location </th>
+          <th> Price </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%@event_videos_purchased.each do |event_video|%>
+          <tr class="list-item" >
+            <td><%=image_tag(event_video.video.thumb.pic_1.url)%></td>
+            <td><%=event_video.event.location_name%></td>
+            <td><%=event_video.price%></td>
+            <form action="/download" method="get">
+              <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+              <input type="hidden" value="<%=event_video.id%>" name="id">
+              <td style="vertical-align: middle;"><button type="submit" name="your_name" value="your_value" class="btn-link">Download Video</button></td>
+            </form>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+    <br>
+  </div>
+</div>
+</div>

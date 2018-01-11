@@ -1,0 +1,127 @@
+<br>
+<%= render :partial => 'sidebar' %>
+
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs nav-justified" role="tablist">
+    <li role="presentation" class="active"><a href="#create" aria-controls="create" role="tab" data-toggle="tab">Created Event</a></li>
+    <li role="presentation"><a href="#subscribe" aria-controls="subscribe" role="tab" data-toggle="tab">Subscribed Event</a></li>
+    
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="create">
+    	
+    	<h1 class="title-style-1">Created Events</h1>
+
+<% @events.each do |event| %>
+
+	<h1 class="title-style-2"> <span class="fa fa-map-marker"></span> <%= event.location_name %> </h1>
+	
+			<% if event.event_videos.empty? %>
+				<br>
+				<p class="text-center">No Videos Found</p>
+				<br>
+			<% else %>
+			
+				<div class="row">
+
+				<% event.event_videos.each do |video| %>
+					
+					<div class="col-md-4">
+						<div class="panel panel-default">
+						    <div class="panel-body">
+						   
+						       
+						          <div class="panel panel-default my_panel">
+						            <div class="panel-body">
+						            	<%= image_tag(video.video.thumb.pic_1.url, :class => 'img-responsive center-block') %>
+						             
+						            </div>
+						            <div class="panel-footer">
+						              <h3>The company</h3>
+						              <p><%= video.event.location_name %></p>
+						              <a href="#" class="btn btn-primary">Read More</a>
+						            </div>
+						          </div>
+						     
+						    </div>
+						  </div>
+					</div>
+					
+					
+				<% end %>
+			
+				</div>
+			
+			<% end %>
+	
+
+	
+<% end %>
+
+
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="subscribe">
+    	
+    	<h1 class="title-style-1">Subscribed Events</h1>
+
+<% @subscribed_events.each do |event| %>
+	<h1 class="title-style-2"> <span class="fa fa-map-marker"></span> <%= event.location_name %> </h1>
+	
+			<% if event.event_videos.empty? %>
+				<br>
+				<p class="text-center">No Videos Found</p>
+				<br>
+			<% else %>
+			
+				<div class="row">
+
+				<% event.event_videos.each do |video| %>
+					
+					<div class="col-md-4">
+						<div class="panel panel-default">
+						    <div class="panel-body">
+						   
+						       
+						          <div class="panel panel-default my_panel">
+						            <div class="panel-body">
+						            	<%= image_tag(video.video.thumb.pic_1.url, :class => 'img-responsive center-block') %>
+						             
+						            </div>
+						            <div class="panel-footer">
+						              <h3>The company</h3>
+						              <p>L<%= video.event.location_name %></p>
+						              <a href="#" class="btn btn-primary">Read More</a>
+						            </div>
+						          </div>
+						     
+						    </div>
+						  </div>
+					</div>
+					
+					
+				<% end %>
+			
+				</div>
+			
+			<% end %>
+<% end %>
+
+    </div>
+    
+  </div>
+
+</div>
+
+
+
+
+
+
+</div>
+
+</div>
