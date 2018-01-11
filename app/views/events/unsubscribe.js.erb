@@ -1,0 +1,4 @@
+var new_href = $('#notify-btn').attr('href');
+new_href = new_href.replace("un", "");
+
+$('#notify-btn').removeClass('btn-default btn-danger').addClass('btn-primary').attr('href', new_href).html('Notify Me');

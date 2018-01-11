@@ -1,0 +1,82 @@
+<%= form_for @event, :html => { :class => "form-horizontal event" } do |f| %>
+
+  <% if @event.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <% @event.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+    <div class="form-group">
+    <%= f.label :location_name, :class => 'control-label col-lg-4' %>
+    <div class="col-lg-8">
+      <%= f.text_area :location_name, :class => 'form-control' %>
+    </div>
+  </div>
+
+  
+      <%= f.hidden_field :latitude, :class => 'form-control' %>
+   
+  
+      <%= f.hidden_field :longitude, :class => 'form-control' %>
+    
+
+   <div class="form-group">
+    <%= f.label :date_of_occurence, :class => 'control-label col-lg-4' %>
+    <div class="col-lg-8">
+      <%= f.text_field :date_of_occurence, :class => 'form-control' %>
+    </div>
+  </div>
+
+   <div class="form-group">
+    <%= f.label :time_of_occurence, :class => 'control-label col-lg-4' %>
+    <div class="col-lg-8">
+      <%= f.text_field :time_of_occurence, :placeholder => 'eg: (13.30) hrs' ,:class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-lg-4' %>
+    <div class="col-lg-8">
+      <%= f.text_area :description, :class => 'form-control' %>
+      <p class="error-flag">No special characters or phone numbers are allowed!</p>
+    </div>
+  </div>
+ <div class="form-group">
+    <%= f.label :tags, :class => 'control-label col-lg-4' %>
+
+    <div class="col-lg-8">
+      <div class="checkbox">
+        <label> <%= f.check_box :category_list, { :multiple => true }, 'accident', nil  %> Accident </label>
+        <label> <%= f.check_box :category_list, { :multiple => true }, 'theft', nil  %> Theft / Burglary </label>
+        <label> <%= f.check_box :category_list, { :multiple => true }, 'assault', nil  %> Assault </label>
+        <label> <%= f.check_box :category_list, { :multiple => true }, 'vandalism', nil   %> Vandalism </label>
+        <label> <%= f.check_box :category_list, { :multiple => true }, 'disaster', nil   %> Disaster </label>
+        <label> <%= f.check_box :category_list, { :multiple => true }, 'driving', nil   %> Reckless/Dangerous Driving </label>
+        <label> <%= f.check_box :category_list, { :multiple => true }, 'roadrage', nil   %> Road Rage </label>
+        <label> <%= f.check_box :category_list, { :multiple => true }, 'other', nil   %> Other </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.text_field :place_id, :class => 'form-control hidden' %>
+  </div>
+  <div class="alert alert-warning alert-message-popup" role="alert">
+    <input type="checkbox" id="accept" class="accept" onchange="document.getElementById('create_event').disabled = !this.checked;">
+    <span>Events cannot be edited or deleted once created</span>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-offset-4 col-lg-8">
+      <%= f.submit nil, :class => 'btn btn-primary', :id => 'create_event' %>
+      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+    </div>
+  </div>
+<% end %>

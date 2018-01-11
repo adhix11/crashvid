@@ -1,0 +1,15 @@
+<br/> <br/> 
+<br/> <br/> 
+<%if @response["status"] == 1%>
+<center> <%=link_to "Please login befor continuing",new_user_session_path%></center>
+<%elsif @response["status"] == 2%>
+<center><h3>New Event Video</h3></center>
+    <center> Before uploading the video,Please click here to link your Stripe Account <a href='/users/auth/stripe_connect'>Link your Stripe Account </a> </center>
+<%else%>
+<center><h3>New Event Video</h3></center>
+
+	<%= render 'form' %>  
+<%end%>
+
+
+

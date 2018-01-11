@@ -1,0 +1,71 @@
+<%if @response["status"] == 1%>
+  $("#login").modal("show");
+<%else%>
+$('#new_event_form').html("<%= j (render 'form') %>");
+
+var lat = $("#hidden_lat").val();
+var lng = $("#hidden_lng").val();
+var place_id = $("#hidden_place_id").val();
+var place_address = $("#hidden_address").val();
+$("#event_latitude").val(lat);
+$("#event_longitude").val(lng);
+$("#event_location_name").val(place_address);
+$("#place_id").val(place_id);
+$("#event_latitude").attr('readonly',true);
+$("#event_longitude").attr('readonly',true);
+$("#event_location_name").attr('readonly',true);
+$('#create_event').prop('disabled', true);
+$("#event_date_of_occurence").datetimepicker({
+  maxDate: 0,
+  step: 30,
+  timepicker:false,
+  format:'d M Y',
+  defaultDate:new Date()
+});
+
+
+$("#event_description").keyup(function(){ validateDescription($(this).val())});
+
+
+$("#event_date_of_occurence").val(formatDate(new Date()));
+$("#event_time_of_occurence").datetimepicker({
+  	datepicker: false,
+    format:'H:i'
+});
+
+function validateDescription(text)
+{
+
+  var pattern = /[0-9]{5}|[@#$%&*()_+.[\]{}?]*$/
+  if(text.match(pattern)[0]!= "") {
+     
+      value = $("#event_description").val();
+      value = value.replace(pattern, "");
+      $("#event_description").val(value);
+      $('.error-flag').fadeIn(1000);
+     
+  }
+  else{
+     $('.error-flag').fadeOut(2500);
+  }
+
+}
+
+function formatDate(date) {
+  var monthNames = [
+    "Jan", "Feb", "Mar",
+    "Apr", "May", "Jun", "Jul",
+    "Aug", "Sep", "Oct",
+    "Nov", "Dec"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return day + ' ' + monthNames[monthIndex] + ' ' + year;
+}
+$('#cv_create_title').text("Creat Event (Request Video)");
+$("#cv_create").modal("show");
+<%end%>
+

@@ -1,0 +1,22 @@
+<h1>All Videos</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_videos.each do |event_video| %>
+      <tr>
+        <td><%= event_video.name %></td>
+        <td><%= link_to 'Show', event_video %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event video', new_event_video_path %>

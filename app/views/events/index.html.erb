@@ -1,0 +1,42 @@
+<%- model_class = Event -%>
+<%if current_user.stripe_access_token.nil?%>
+  <a href="/users/auth/stripe_connect"> Link Stripe </a>
+<%end%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:latitude) %></th>
+      <th><%= model_class.human_attribute_name(:longitude) %></th>
+      <th><%= model_class.human_attribute_name(:date_of_occurence) %></th>
+      <th><%= model_class.human_attribute_name(:location_name) %></th>
+      <th>Tags</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= link_to event.id, event_path(event) %></td>
+        <td><%= event.latitude %></td>
+        <td><%= event.longitude %></td>
+        <td><%= event.date_of_occurence %></td>
+        <td><%= event.location_name %></td>
+        <td>
+          <%event.categories.each do |category| %>
+            <%=category.name%>
+          <%end%>
+        </td>
+        <td>
+          <%= link_to "Show videos linked to this event",show_event_videos_path(event.id),:class=>"btn btn-default btn-xs",:remote => true%>
+          <%= link_to t('.show', :default => t("helpers.links.show")),event_path(event), :class => 'btn btn-default btn-xs' %>
+      </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'New Event',new_event_path,:class => 'btn btn-primary',:remote=> true %>
+<div id="new_event_form"></div>

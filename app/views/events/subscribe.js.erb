@@ -1,0 +1,5 @@
+var new_href = $('#notify-btn').attr('href');
+new_href = new_href.replace("subs", "unsubs");
+
+
+$('#notify-btn').removeClass('btn-primary btn-default').addClass('btn-danger').attr('href', new_href).html('Don\'t Notify Me');

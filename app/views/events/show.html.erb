@@ -1,0 +1,22 @@
+<br/>
+<br/>
+<br/>
+<%- model_class = Event -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:latitude) %>:</strong></dt>
+  <dd><%= @event.latitude %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:longitude) %>:</strong></dt>
+  <dd><%= @event.longitude %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:date_of_occurence) %>:</strong></dt>
+  <dd><%= @event.date_of_occurence %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:location_name) %>:</strong></dt>
+  <dd><%= @event.location_name %></dd>
+  <% @event.category_list.each do |category|%> 
+    <dd> <%=category%>
+  </dd>
+<%end%>
+</dl>
+<%= link_to "Return to search",root_path, :class => 'btn btn-default'  %>
